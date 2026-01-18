@@ -1,0 +1,8 @@
+domain = "dopsi.ch"
+repo_url = "https://github.com/OWNER/REPO"
+content_dir = "content"
+static_dir = "static"
+media_dir = "media"
+output_dir = "site"
+branch = "main"
+site_title = "dopsi.ch"

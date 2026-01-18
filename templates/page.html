@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article>
+  <h2>{{ title }}</h2>
+  <section class="body">{{ body | safe }}</section>
+  <section class="history">
+    <h3>History</h3>
+    <ul>
+    {% for c in commits %}
+      <li>
+        <a href="{{ commit_url(c.sha) }}">{{ c.sha[:7] }}</a>
+        — <em>{{ c.date }}</em>
+        — {{ c.author }} — {{ c.message }}
+      </li>
+    {% endfor %}
+    </ul>
+    <p><a href="{{ commits_for_path_url }}">All commits for this page</a></p>
+  </section>
+</article>
+{% endblock %}

@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dopsi-site"
+version = "0.1.0"
+description = "Simple RST-based static site generator for dopsi.ch"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "docutils>=0.20",
+  "Jinja2>=3.0",
+  "tomli>=2.0"
+]
+
+[project.optional-dependencies]
+dev = ["black", "pytest"]
+
+[project.scripts]
+generate = "scripts.generate:main"
+
+[tool.setuptools]
+py-modules = []
+
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+[tool.pixi.pypi-dependencies]
+dopsi-site = { path = ".", editable = true }
+
+[tool.pixi.environments]
+default = { solve-group = "default" }
+dev = { features = ["dev"], solve-group = "default" }
+
+[tool.pixi.tasks]
