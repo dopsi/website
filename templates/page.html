@@ -5,17 +5,28 @@
   <h2>{{ title }}</h2>
   <section class="body">{{ body | safe }}</section>
   <section class="history">
-    <h3>History</h3>
-    <ul>
-    {% for c in commits %}
-      <li>
-        <a href="{{ commit_url(c.sha) }}">{{ c.sha[:7] }}</a>
-        — <em>{{ c.date }}</em>
-        — {{ c.author }} — {{ c.message }}
-      </li>
-    {% endfor %}
-    </ul>
-    <p><a href="{{ commits_for_path_url }}">All commits for this page</a></p>
+    <details>
+        <summary>Page history</summary>
+        <table>
+            <thead>
+                <tr>
+                    <th>SHA</th>
+                    <th>Date</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for c in commits %}
+                <tr>
+                    <td><a href="{{ commit_url(c.sha) }}">{{ c.sha[:7] }}</a></td>
+                    <td>{{ c.date }}</td>
+                    <td>{{ c.message }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <p><a href="{{ commits_for_path_url }}">All commits for this page</a></p>
+    </details>
   </section>
 </article>
 {% endblock %}
