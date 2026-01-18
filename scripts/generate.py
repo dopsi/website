@@ -104,6 +104,7 @@ def main(argv=None):
     repo_url = cfg.get("repo_url", "")
     branch = cfg.get("branch", "main")
     site_title = cfg.get("site_title", "Site")
+    domain = cfg.get("domain")
 
     rst_files = find_rst_files(content_dir)
 
@@ -156,6 +157,13 @@ def main(argv=None):
 
     ensure_dir(out_dir)
     copy_static(static_dir, out_dir)
+
+    # Write CNAME for GitHub Pages if domain provided
+    if domain:
+        cname_path = os.path.join(out_dir, "CNAME")
+        with open(cname_path, "w", encoding="utf-8") as f:
+            f.write(domain.strip() + "\n")
+        print("Wrote CNAME ->", cname_path)
     try:
         copy_media(media_dir, out_dir)
     except FileNotFoundError:
